@@ -1,0 +1,53 @@
+ECS Demo Notes
+-------------------
+
+git clone https://github.com/awslabs/ecs-demo-php-simple-app
+cd ecs-demo-php-simple-app
+cat Dockerfile
+
+
+
+docker build -t sajee/amazon-ecs-sample .
+docker images
+docker run -p 80:80 sajee/amazon-ecs-sample
+
+# make changes to sample app
+docker build -t sajee/amazon-ecs-sample .
+docker push sajee/amazon-ecs-sample
+
+
+docker build -t sajee/amazon-ecs-sample:4 . 
+docker push     sajee/amazon-ecs-sample:4
+
+# ECS Container Instances
+
+
+
+<?php
+$instance_id = file_get_contents("http://instance-data/latest/meta-data/instance-id");
+echo $instance_id, "\n";
+?>
+
+
+
+
+
+
+
+-----
+aws ecs update-service --service php1 --desired-count 0
+
+ami-ddc7b6b7
+
+
+#!/bin/bash
+echo ECS_CLUSTER=your_cluster_name >> /etc/ecs/ecs.config
+
+
+
+-----
+docker images
+docker info
+docker ps -a
+docker rm $(docker ps -aq) #remove all containers
+docker rmi $(docker images -aq) 
